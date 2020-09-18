@@ -1,0 +1,3 @@
+[submodule "matrix_docs"]
+	path = matrix_docs
+	url = https://github.com/matrix-org/matrix-doc
