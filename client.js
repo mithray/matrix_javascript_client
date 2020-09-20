@@ -1,7 +1,9 @@
-const sdk = require("matrix-js-sdk")
+//const sdk = require("matrix-js-sdk")
+const path = require("path")
 const parse = require('url-parse')
 const fetch = require("node-fetch")
 const crypto = require("crypto")
+const objectify = require("../objectify/index.js")
 //const yaml
 
 const serverURL = ('http://localhost:8008')
@@ -97,16 +99,26 @@ async function main(){
 		username: '7kxo8eua9aoe',
 		password: 'thknntaheo89'
 	}//await createRandomUserObject()
+	const api_path = path.join(process.cwd(),'matrix_docs/api/client-server/')
+	const obj = await objectify(api_path)
+	const keys = Object.keys(obj)
+	console.log(JSON.stringify(keys, null, 2))
+	for (let i = 0; i < keys.length; i++){
+//		console.log(obj[keys[i]])
+	}
+
+	console.log(obj['rooms'])
+	/*
+	*/
 	/*
 	const registration = await register(registrationObject)
-	*/
 	const loginResponse = await login(user)
 	const res = await loginResponse.json()
+	*/
 	/*
 	console.log(res)
 	const createRoomResponse =  await createRoom('programming2',res.access_token)
 	console.log(await createRoomResponse.json())
-	*/
 	const room_id = "!XZFWPTkQHhIrlAwutV:boss"
 
 	const sendMessageResponse = await sendMessage({msgtype:"m.text",body: "hi! how are you ? ", access_token: res.access_token, room_id: room_id})
@@ -116,5 +128,6 @@ async function main(){
 	console.log('syncResponse:')
 	const res2 = await syncResponse.json()
 	console.log(res2.account_data.events[0].content.global)
+	*/
 }
 main()
